@@ -1,12 +1,14 @@
 import time
 import random
 
+
 # Game intro
 def intro():
     print("🗝 Welcome to the Ultimate Treasure Hunt!")
     print("Solve riddles perfectly to find keys and unlock the treasure.")
     print("Make a wrong guess, and you cannot get the key!\n")
     time.sleep(2)
+
 
 # Rooms with riddles and answers
 rooms = {
@@ -62,11 +64,12 @@ rooms = {
 # Player inventory
 inventory = []
 
+
 # Move between rooms
 def move(current_room):
     print(f"\n📍 You are in {current_room}")
     print(rooms[current_room]["description"])
-    
+
     # Solve riddle if it exists
     if rooms[current_room]["riddle"]:
         print("🔍 Riddle:", rooms[current_room]["riddle"])
@@ -76,17 +79,17 @@ def move(current_room):
             inventory.append(rooms[current_room]["key"])
         else:
             print("❌ Wrong! No key this time. Try another room or think carefully.")
-    
+
     print("👜 Inventory:", inventory)
 
     # Choose next room
     if rooms[current_room]["next"]:
         print("\nWhere to go next?")
         for i, room in enumerate(rooms[current_room]["next"]):
-            print(f"{i+1}. {room}")
+            print(f"{i + 1}. {room}")
         choice = input("Enter number: ")
         if choice.isdigit() and 1 <= int(choice) <= len(rooms[current_room]["next"]):
-            return rooms[current_room]["next"][int(choice)-1]
+            return rooms[current_room]["next"][int(choice) - 1]
         else:
             print("Invalid choice, staying here.")
             return current_room
@@ -98,6 +101,7 @@ def move(current_room):
             print("❌ You need the Master Key to open the treasure. Keep hunting!")
         return None
 
+
 # Main game loop
 def play_game():
     intro()
@@ -105,5 +109,6 @@ def play_game():
     while current_room:
         current_room = move(current_room)
         time.sleep(1)
+
 
 play_game()
